@@ -1,6 +1,10 @@
 <script>
     export default {
         props: {
+            matched:{
+                type: Boolean,
+                default: false,
+            },
             value: {
                 type: Number,
                 required: true,
@@ -18,7 +22,8 @@
             const turnCard = () => {
                 context.emit('turn-card',{
                     //position inside of the list
-                    position: props.position
+                    position: props.position,
+                    frontValue: props.value,
                 })
             }
             return {
@@ -32,7 +37,7 @@
 <template>
     
     <div class="card" @click="turnCard">
-        <div v-if="visible" class="card-face is-front">{{ value }}</div>
+        <div v-if="visible" class="card-face is-front">{{ value }} - {{ matched }}</div>
         <div v-else class="card-back is-back">Back</div>
         
     </div>
