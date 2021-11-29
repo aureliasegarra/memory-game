@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 <script>
 import _ from 'lodash';
-import { computed, ref,watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import Card from "./components/Card.vue";
 
 
@@ -72,12 +73,18 @@ export default {
       cardList.value[payload.position].visible = true;
 
       if(userSelection.value[0]){
+        if(
+          userSelection.value[0].position === payload.position &&
+          userSelection.value[0].faceValue === payload.faceValue
+        ) {
+          return
+        } else {
         userSelection.value[1] = payload;
-      }else {
+        }
+      } else {
         userSelection.value[0] = payload;
-      }
+      } 
     }
-
     watch(
       userSelection, 
       currentValue => {
@@ -96,18 +103,15 @@ export default {
           }, 2000);
           
         }
-
-        
-
     
         userSelection.value.length = 0;
       }
-    }, { deep: true }
+      }, { deep: true }
     )
 
     return {
       cardList,
-      flipCard,
+      flipCard, 
       userSelection,
       status, 
       shuffleCards, 
@@ -115,6 +119,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <template>
