@@ -37,7 +37,7 @@
 <template>
     
     <div class="card" @click="turnCard">
-        <div v-if="visible" class="card-face is-front">{{ value }} - {{ matched }}</div>
+        <div v-if="visible" class="card-face is-front">{{ value }} - {{ position }}</div>
         <div v-else class="card-back is-back">Back</div>
         
     </div>
