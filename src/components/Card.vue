@@ -6,7 +6,7 @@
                 default: false,
             },
             value: {
-                type: Number,
+                type: String,
                 required: true,
             },
             visible: {
@@ -37,8 +37,11 @@
 <template>
     
     <div class="card" @click="turnCard">
-        <div v-if="visible" class="card-face is-front">{{ value }} - {{ position }} - {{ matched }}</div>
-        <div v-else class="card-back is-back">Back</div>
+        <div v-if="visible" class="card-face is-front">
+            <img :src="`/images/${value}.png`" :alt="value" class="image-face">
+            <img v-if="matched" src="../../public/images/checked.png" class="icon-checkmark" alt="checked icon">
+        </div>
+        <div v-else class="card-back is-back"></div>
         
     </div>
     
@@ -47,13 +50,18 @@
 <style scoped>
 
 .card {
-    border: 5px solid #ccc;
     position: relative;
+   
 }
 .card-face {
     width: 100%;
     height: 100%;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
 }
 .card-back {
     width: 100%;
@@ -62,13 +70,28 @@
 }
 
 .card-face.is-front {
-  background-color: red;
+  background-color: rgb(66, 65, 65);
   color: white;
+  border-radius: 10px;
 }
 
 .card-back.is-back {
-  background-color: blue;
+  background-image:url('../../public/images/vue.png');
+  background-size: cover;
+  background-position: center;
   color: white;
+  border-radius: 10px;
+}
+
+.icon-checkmark {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 20%;
+}
+
+.image-face {
+    width: 70%;
 }
 
 </style>

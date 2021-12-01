@@ -45,7 +45,16 @@ export default {
       })
     }
 
-  const cardItems = [1, 2, 3, 4, 5, 6, 7, 8];
+  const cardItems = [
+    'codepen', 
+    'fiddle', 
+    'github', 
+    'gitlab', 
+    'golang', 
+    'html', 
+    'swift', 
+    'vscode'
+    ];
 
   cardItems.forEach(item => {
     cardList.value.push({
@@ -143,6 +152,18 @@ export default {
 </template>
 
 <style>
+
+  html {
+    background-color: #000C19;
+  }
+  
+  h1 {
+    margin-top: 0;
+    color: #41B883;
+    font-size: 40px;
+    margin-bottom: 50px;
+  }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -150,13 +171,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
+  
 }
-
 
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px 100px;
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(4, 120px);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   justify-content: center;
