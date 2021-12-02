@@ -59,15 +59,15 @@ export default {
   cardItems.forEach(item => {
     cardList.value.push({
       value: item,
-        visible: false,
-        position: null,
-        matched: false
+      visible: false,
+      position: null,
+      matched: false
     }),
     cardList.value.push({
       value: item,
-        visible: false,
-        position: null,
-        matched: false
+      visible: false,
+      position: null,
+      matched: false
     })
   });
 
