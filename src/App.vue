@@ -160,7 +160,7 @@ export default {
   h1 {
     margin-top: 0;
     color: #41B883;
-    font-size: 50px;
+    font-size: 40px;
     font-family: sans-serif, arial;
     margin-bottom: 50px;
   }
