@@ -1,70 +1,61 @@
 /* eslint-disable vue/return-in-computed-property */
 <script>
-import { computed } from 'vue'
-export default {
-  props: {
-    matched: {
-      type: Boolean,
-      default: false
-    },
-    position: {
-      type: Number,
-      required: true
-    },
-    value: {
-      type: String,
-      required: true
-    },
-    visible: {
-      type: Boolean,
-      default: false
+    export default {
+        props: {
+            matched:{
+                type: Boolean,
+                default: false,
+            },
+            value: {
+                type: Number,
+                required: true,
+            },
+            visible: {
+                type: Boolean,
+                default: false,
+            },
+            position: {
+                type: Number,
+                required: true,
+            }
+        },
+        setup(props, context){
+            const turnCard = () => {
+                context.emit('turn-card',{
+                    //position inside of the list
+                    position: props.position,
+                    frontValue: props.value,
+                })
+            }
+            return {
+                turnCard
+            }
+        }
+       
     }
-  },
-  setup(props, context) {
-    // eslint-disable-next-line vue/return-in-computed-property
-    const flippedStyles = computed(() => {
-      if (props.visible) {
-        return 'is-flipped'
-      }
-    })
-    
-    const selectCard = () => {
-      context.emit('select-card', {
-        position: props.position,
-        faceValue: props.value
-      })
-    }
-    return {
-      flippedStyles,
-      selectCard
-    }
-  }
-}
+ 
+
 </script>
 
 <template>
-  <div class="card" :class="flippedStyles" @click="selectCard">
-    <div class="card-face is-front">
-      <img
-        class="card-image"
-        :srcset="`/images/${value}@2x.png 2x, /images/${value}.png 1x`"
-        :src="`/images/${value}.png`"
-        :alt="value"
-      />
-      <img v-if="matched" src="/images/checkmark.svg" class="icon-checkmark" />
+    
+    <div class="card" @click="turnCard">
+        <div v-if="visible" class="card-face is-front">{{ value }} - {{ position }} - {{ matched }}</div>
+        <div v-else class="card-back is-back">Back</div>
+        
     </div>
     <div class="card-face is-back"></div>
-  </div>
 </template>
 
 <style>
 .card {
-  position: relative;
-  transition: 0.5s transform ease-in;
-  transform-style: preserve-3d;
+    border: 5px solid #ccc;
+    position: relative;
 }
-.card.is-flipped {
-  transform: rotateY(180deg);
+.card-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 .card-face {
@@ -79,27 +70,13 @@ export default {
 }
 
 .card-face.is-front {
-  background-color: rgb(66, 65, 65);
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.card-face.is-back {
-  background-image:url('../../public/images/vue.png');
-  background-size: cover;
-  background-position: center;
+  background-color: red;
   color: white;
 }
 
-.icon-checkmark {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    width: 20%;
-}
-
-.card-image {
-    max-width: 100%;
+.card-back.is-back {
+  background-color: blue;
+  color: white;
 }
 
 
